@@ -1,0 +1,81 @@
+{
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js": {
+    "file": "internal/immutable/assets/duckdb-browser-mvp.worker-4c537160.js",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js"
+  },
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js": {
+    "file": "internal/immutable/assets/duckdb-browser-eh.worker-bb611981.js",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js"
+  },
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-eh.wasm": {
+    "file": "internal/immutable/assets/duckdb-eh-bbef8717.wasm",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-eh.wasm"
+  },
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm": {
+    "file": "internal/immutable/assets/duckdb-mvp-ac194963.wasm",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm"
+  },
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "internal/immutable/start-9ebc2303.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-d9920f9d.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "internal/immutable/pages/__layout.svelte-a93b1b79.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-d9920f9d.js"
+    ],
+    "css": [
+      "internal/immutable/assets/__layout-c73c595b.css"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "internal/immutable/error.svelte-1555e1ea.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-d9920f9d.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "internal/immutable/pages/index.svelte-0c46537c.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-d9920f9d.js"
+    ],
+    "css": [
+      "internal/immutable/assets/index-e28b7c05.css"
+    ],
+    "assets": [
+      "internal/immutable/assets/duckdb-mvp-ac194963.wasm",
+      "internal/immutable/assets/duckdb-browser-mvp.worker-4c537160.js",
+      "internal/immutable/assets/duckdb-eh-bbef8717.wasm",
+      "internal/immutable/assets/duckdb-browser-eh.worker-bb611981.js"
+    ]
+  },
+  "_index-d9920f9d.js": {
+    "file": "internal/immutable/chunks/index-d9920f9d.js"
+  },
+  "src/routes/index.css": {
+    "file": "internal/immutable/assets/index-e28b7c05.css",
+    "src": "src/routes/index.css"
+  },
+  "src/routes/__layout.css": {
+    "file": "internal/immutable/assets/__layout-c73c595b.css",
+    "src": "src/routes/__layout.css"
+  }
+}
