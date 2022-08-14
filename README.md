@@ -1,38 +1,14 @@
-# create-svelte
+# SeriesHeat with DuckDB-Wasm
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This project is a replica of [SeriesHeat](https://vallandingham.me/seriesheat) by [Jim Vallandingham](https://vallandingham.me), that uses [DuckDB-Wasm](https://duckdb.org/2021/10/29/duckdb-wasm.html) instead of [phiresky](https://phiresky.github.io/blog)'s [sql.js-httpvfs](https://github.com/phiresky/sql.js-httpvfs).
 
-## Creating a project
+Data comes from [IMDb Datasets](https://www.imdb.com/interfaces) filtered and preprocessed to Parquet files so they can be directly queried. Code for building said files can be found in [@myagues/datasets/imdb](https://github.com/myagues/datasets/tree/main/imdb), and code for the project is available [@myagues/seriesheat-duckdb-wasm](https://github.com/myagues/seriesheat-duckdb-wasm).
 
-If you're seeing this, you've probably already done this step. Congrats!
+## References
 
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- _SeriesHeat_ [[1]](https://vallandingham.me/seriesheat) [[2]](https://twitter.com/vlandham/status/1445406386968571904)
+- [_Plot: Cell_](https://observablehq.com/@observablehq/plot-cell#cell-16) by [Mike Bostock](https://bost.ocks.org/mike)
+- [_SeriesHeat Cheap Replica_](https://observablehq.com/@myagues/seriesheat-cheap-replica) using just Observable's Plot API
+- [_Making visualizations literally w/ Svelte & D3_](https://www.connorrothschild.com/post/svelte-and-d3) by [Connor Rothschild](https://github.com/connorrothschild)
+- [_Plot: colorContrast transform_](https://observablehq.com/@observablehq/plot-colorcontrast-custom-transform) by [Philippe Riviere](https://github.com/Fil) and [Anna Wiederkehr](http://annawiederkehr.com)
+- [_sveltekit-typescript_](https://github.com/duckdb-wasm-examples/sveltekit-typescript) is a basic demo of DuckDB-Wasm with SvelteKit by [Benjamin Schmidt](https://benschmidt.org)
