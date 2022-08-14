@@ -16,7 +16,7 @@
     "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm"
   },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "internal/immutable/start-cd6f27a5.js",
+    "file": "internal/immutable/start-d040c5d8.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -37,7 +37,7 @@
       "_index-d9920f9d.js"
     ],
     "css": [
-      "internal/immutable/assets/__layout-c73c595b.css"
+      "internal/immutable/assets/__layout-64522548.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -50,7 +50,7 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "internal/immutable/pages/index.svelte-1e952ee5.js",
+    "file": "internal/immutable/pages/index.svelte-13c4f602.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -58,7 +58,7 @@
       "_index-d9920f9d.js"
     ],
     "css": [
-      "internal/immutable/assets/index-e28b7c05.css"
+      "internal/immutable/assets/index-a3a1531d.css"
     ],
     "assets": [
       "internal/immutable/assets/duckdb-mvp-ac194963.wasm",
@@ -71,11 +71,11 @@
     "file": "internal/immutable/chunks/index-d9920f9d.js"
   },
   "src/routes/__layout.css": {
-    "file": "internal/immutable/assets/__layout-c73c595b.css",
+    "file": "internal/immutable/assets/__layout-64522548.css",
     "src": "src/routes/__layout.css"
   },
   "src/routes/index.css": {
-    "file": "internal/immutable/assets/index-e28b7c05.css",
+    "file": "internal/immutable/assets/index-a3a1531d.css",
     "src": "src/routes/index.css"
   }
 }
