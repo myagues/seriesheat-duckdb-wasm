@@ -35,11 +35,11 @@ export const initDB = async () => {
 
 	await db.registerFileURL(
 		'imdb.parquet',
-		'https://myagues.github.io/seriesheat-duckdb-wasm/5b48027d187945548497e6b9493c54cd.parquet'
-		// 'http://localhost:5173/5b48027d187945548497e6b9493c54cd.parquet'
+		'https://myagues.github.io/seriesheat-duckdb-wasm/episodes.parquet'
+		// 'http://localhost:5173/episodes.parquet'
 	);
 
-	// const parquet = await fetch(`${assets}/11218b1788f345329a1d4176d886b1da.parquet`).then((d) =>
+	// const parquet = await fetch(`${assets}/episodes.parquet`).then((d) =>
 	// 	d.arrayBuffer()
 	// );
 	// await db.registerFileBuffer('imdb.parquet', new Uint8Array(parquet));

@@ -1,0 +1,122 @@
+{
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js": {
+    "file": "internal/immutable/assets/duckdb-browser-mvp.worker-cf6d2f36.js",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js"
+  },
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js": {
+    "file": "internal/immutable/assets/duckdb-browser-eh.worker-9ac306d5.js",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js"
+  },
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-eh.wasm": {
+    "file": "internal/immutable/assets/duckdb-eh-b81a4d32.wasm",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-eh.wasm"
+  },
+  "node_modules/@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm": {
+    "file": "internal/immutable/assets/duckdb-mvp-7929774d.wasm",
+    "src": "node_modules/@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
+    "file": "internal/immutable/start-30d8b222.js",
+    "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-c21c382a.js",
+      "_singletons-069967db.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/generated/nodes/0.js",
+      ".svelte-kit/generated/nodes/1.js",
+      ".svelte-kit/generated/nodes/2.js"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "internal/immutable/components/pages/_layout.svelte-56eea4eb.js",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-c21c382a.js"
+    ],
+    "css": [
+      "internal/immutable/assets/_layout-64522548.css"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "internal/immutable/components/error.svelte-13b63cf4.js",
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-c21c382a.js",
+      "_singletons-069967db.js"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "internal/immutable/components/pages/_page.svelte-39bb4173.js",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-c21c382a.js"
+    ],
+    "css": [
+      "internal/immutable/assets/_page-a3a1531d.css"
+    ],
+    "assets": [
+      "internal/immutable/assets/duckdb-mvp-7929774d.wasm",
+      "internal/immutable/assets/duckdb-browser-mvp.worker-cf6d2f36.js",
+      "internal/immutable/assets/duckdb-eh-b81a4d32.wasm",
+      "internal/immutable/assets/duckdb-browser-eh.worker-9ac306d5.js"
+    ]
+  },
+  "src/routes/+layout.ts": {
+    "file": "internal/immutable/modules/pages/_layout.ts-ccf77788.js",
+    "src": "src/routes/+layout.ts",
+    "isEntry": true,
+    "imports": [
+      "__layout-c2405b24.js"
+    ]
+  },
+  "_singletons-069967db.js": {
+    "file": "internal/immutable/chunks/singletons-069967db.js",
+    "imports": [
+      "_index-c21c382a.js"
+    ]
+  },
+  "_index-c21c382a.js": {
+    "file": "internal/immutable/chunks/index-c21c382a.js"
+  },
+  "__layout-c2405b24.js": {
+    "file": "internal/immutable/chunks/_layout-c2405b24.js"
+  },
+  ".svelte-kit/generated/nodes/0.js": {
+    "file": "internal/immutable/chunks/0-f6ed38dd.js",
+    "src": ".svelte-kit/generated/nodes/0.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "__layout-c2405b24.js",
+      "src/routes/+layout.svelte"
+    ]
+  },
+  ".svelte-kit/generated/nodes/1.js": {
+    "file": "internal/immutable/chunks/1-08489e58.js",
+    "src": ".svelte-kit/generated/nodes/1.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/@sveltejs/kit/src/runtime/components/error.svelte"
+    ]
+  },
+  ".svelte-kit/generated/nodes/2.js": {
+    "file": "internal/immutable/chunks/2-0a4f74ae.js",
+    "src": ".svelte-kit/generated/nodes/2.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/routes/+page.svelte"
+    ]
+  },
+  "src/routes/+layout.css": {
+    "file": "internal/immutable/assets/_layout-64522548.css",
+    "src": "src/routes/+layout.css"
+  },
+  "src/routes/+page.css": {
+    "file": "internal/immutable/assets/_page-a3a1531d.css",
+    "src": "src/routes/+page.css"
+  }
+}
