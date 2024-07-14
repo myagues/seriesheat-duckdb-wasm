@@ -1,11 +1,8 @@
 import * as duckdb from '@duckdb/duckdb-wasm';
-import duckdb_wasm from '/node_modules/@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url';
-import mvp_worker from '/node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js?url';
-import duckdb_wasm_eh from '/node_modules/@duckdb/duckdb-wasm/dist/duckdb-eh.wasm?url';
-import eh_worker from '/node_modules/@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js?url';
-
-import Worker from 'web-worker';
-import { assets } from '$app/paths';
+import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url';
+import mvp_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js?url';
+import duckdb_wasm_eh from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm?url';
+import eh_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js?url';
 
 const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
 	mvp: {
@@ -34,14 +31,20 @@ export const initDB = async () => {
 	await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
 	await db.registerFileURL(
-		'imdb.parquet',
-		'https://myagues.github.io/seriesheat-duckdb-wasm/episodes.parquet'
-		// 'http://localhost:5173/episodes.parquet'
+		'episodes.parquet',
+		'https://myagues.github.io/seriesheat-duckdb-wasm/episodes.parquet',
+		// 'http://localhost:5173/episodes.parquet',
+		duckdb.DuckDBDataProtocol.HTTP,
+		false
 	);
 
-	// const parquet = await fetch(`${assets}/episodes.parquet`).then((d) =>
-	// 	d.arrayBuffer()
-	// );
-	// await db.registerFileBuffer('imdb.parquet', new Uint8Array(parquet));
+	await db.registerFileURL(
+		'series.parquet',
+		'https://myagues.github.io/seriesheat-duckdb-wasm/series.parquet',
+		// 'http://localhost:5173/series.parquet',
+		duckdb.DuckDBDataProtocol.HTTP,
+		false
+	);
+
 	return db;
 };

@@ -37,30 +37,27 @@
 	const rectSize = 40;
 	const colorScale = scalePow().exponent(1.5).domain([0, 10]);
 	const range = (start: number, stop: number, step: number = 1) =>
-		Array.from(
-			{ length: (stop - start) / step + 1 },
-			(_, i) => start + i * step
-		);
+		Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
 
 	onMount(async () => {
 		const db = await initDB();
 		con = db.connect();
 		// load list of series from Parquet file as a temp table
-		await con.then((con) =>
-			con.query(`
-			create temp table if not exists 'series_map' as (
-				select
-					seriesID,
-					seriesTitle,
-					min(startYear) as 'beginYear',
-					coalesce(sum(numVotes), 0) as totalVotes
-				from parquet_scan('imdb.parquet')
-				where startYear is not null
-				group by seriesID, seriesTitle
-				order by totalVotes desc
-			)
-		`)
-		);
+		// await con.then((con) =>
+		// 	con.query(`
+		// 	create temp table if not exists 'series_map' as (
+		// 		select
+		// 			seriesID,
+		// 			seriesTitle,
+		// 			min(startYear) as 'beginYear',
+		// 			coalesce(sum(numVotes), 0) as totalVotes
+		// 		from parquet_scan('imdb.parquet')
+		// 		where startYear is not null
+		// 		group by seriesID, seriesTitle
+		// 		order by totalVotes desc
+		// 	)
+		// `)
+		// );
 	});
 
 	async function findSeries(filterText: string) {
@@ -70,8 +67,9 @@
 			select
 				seriesID as 'value',
 				concat(seriesTitle, ' (', beginYear, ')') as 'label'
-			from 'series_map'
+			from parquet_scan('series.parquet')
 			where regexp_matches(seriesTitle, '${filterText.replace("'", "''")}', 'i')
+			order by totalVotes desc
 			limit 30
 		`)
 		);
@@ -89,18 +87,18 @@
 				episodeTitle,
 				episodeID,
 				averageRating
-			from parquet_scan('imdb.parquet')
+			from parquet_scan('episodes.parquet')
 			where seriesID = '${event.detail.value}' and seasonNumber > 0
 			order by seasonNumber, episodeNumber
 		`)
 		);
 		// compute label ranges
-		const seasonMin = Math.min(...res.getChild('seasonNumber')?.toArray());
-		const seasonMax = Math.max(...res.getChild('seasonNumber')?.toArray());
-		const episodeMin = Math.min(...res.getChild('episodeNumber')?.toArray());
-		const episodeMax = Math.max(...res.getChild('episodeNumber')?.toArray());
+		const seasonMin = Math.min(...res.getChild('seasonNumber').toArray());
+		const seasonMax = Math.max(...res.getChild('seasonNumber').toArray());
+		const episodeMin = Math.min(...res.getChild('episodeNumber').toArray());
+		const episodeMax = Math.max(...res.getChild('episodeNumber').toArray());
 		axesLabel = {
-			// rangeSeason: [...new Set([...res.getChild('seasonNumber')?.toArray()])],
+			// rangeSeason: [...new Set([...res.getChild('seasonNumber').toArray()])],
 			rangeSeason: range(seasonMin, seasonMax),
 			rangeEpisode: range(episodeMin, episodeMax),
 			episodePad: episodeMin == 0 ? 1 : 0
@@ -122,10 +120,7 @@
 	<div class="flex flex-col">
 		<div class="mx-auto mt-10 mb-5 max-w-2xl">
 			<h1 class="text-3xl font-semibold">
-				<abbr
-					title="Original name and project by Jim Vallandingham"
-					style:cursor="context-menu"
-				>
+				<abbr title="Original name and project by Jim Vallandingham" style:cursor="context-menu">
 					SeriesHeat
 				</abbr> with DuckDB-Wasm
 			</h1>
@@ -179,8 +174,8 @@
 					target="_blank"
 					rel="noreferrer">IMDb Datasets</a
 				>
-				filtered and preprocessed to Parquet files so they can be directly queried.
-				Code for building said files can be found in
+				filtered and preprocessed to Parquet files so they can be directly queried. Code for building
+				said files can be found in
 				<a
 					class="desc-link"
 					href="https://github.com/myagues/datasets/tree/main/imdb"
@@ -198,15 +193,11 @@
 		</div>
 		{#await con}
 			<div class="mx-auto flex items-center gap-2 p-5 pt-10 text-gray-500">
-				<span
-					class="mr-2 block h-7 w-7 animate-spin rounded-full border-4 border-t-green-500"
-				/>
+				<span class="mr-2 block h-7 w-7 animate-spin rounded-full border-4 border-t-green-500" />
 				Loading database...
 			</div>
 		{:then con}
-			<div
-				class="mx-auto flex max-w-2xl w-full flex-row justify-between items-center gap-2"
-			>
+			<div class="mx-auto flex max-w-2xl w-full flex-row justify-between items-center gap-2">
 				<div class="basis-10/12 shrink">
 					<Select
 						placeholder="Search TV Series title (regular expressions allowed)"
@@ -216,38 +207,26 @@
 					/>
 				</div>
 				<div class="flex-none">
-					<label
-						for="flip-toggle"
-						class="relative inline-flex cursor-pointer items-center"
-					>
-						<input
-							type="checkbox"
-							bind:checked={flip}
-							id="flip-toggle"
-							class="peer sr-only"
-						/>
+					<label for="flip-toggle" class="relative inline-flex cursor-pointer items-center">
+						<input type="checkbox" bind:checked={flip} id="flip-toggle" class="peer sr-only" />
 						<div
 							class="peer h-6 w-11 rounded-full bg-gray-300 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white"
 						/>
-						<span
-							class="ml-3 text-base font-semibold text-gray-900 dark:text-gray-300"
-							>Flip</span
-						>
+						<span class="ml-3 text-base font-semibold text-gray-900 dark:text-gray-300">Flip</span>
 					</label>
 				</div>
 			</div>
 		{/await}
 		{#await ratings}
 			<div class="mx-auto flex items-center gap-2 pt-10 text-gray-500">
-				<span
-					class="mr-2 block h-7 w-7 animate-spin rounded-full border-4 border-t-green-500"
-				/>
+				<span class="mr-2 block h-7 w-7 animate-spin rounded-full border-4 border-t-green-500" />
 				Loading...
 			</div>
 		{:then ratings}
 			{#if ratings && axesLabel}
 				<div class="mx-auto p-8">
 					<svg
+						role="graphics-document document"
 						width={flip
 							? Math.min(episodeWidth, svgWidth * 0.75)
 							: Math.min(seasonWidth, svgWidth * 0.75)}
@@ -262,8 +241,7 @@
 								>{flip ? 'Episode' : 'Season'}</text
 							>
 							<!-- y axis label -->
-							<text
-								class="translate-y-1/2 -translate-x-3 -rotate-90 text-xl font-semibold"
+							<text class="translate-y-1/2 -translate-x-3 -rotate-90 text-xl font-semibold"
 								>{flip ? 'Season' : 'Episode'}</text
 							>
 							<!-- x axis -->
@@ -276,8 +254,7 @@
 									<text
 										x={(rectSize - 1) / 2}
 										y={(rectSize - 1) / 2}
-										style:font-weight={hoverSeason == season ? 700 : 400}
-										>{season}</text
+										style:font-weight={hoverSeason == season ? 700 : 400}>{season}</text
 									>
 								</g>
 							{/each}
@@ -285,18 +262,13 @@
 							{#each axesLabel.rangeEpisode as episode}
 								<g
 									transform={flip
-										? `translate(${
-												rectSize * (episode + axesLabel.episodePad)
-										  }, 0)`
-										: `translate(0, ${
-												rectSize * (episode + axesLabel.episodePad)
-										  })`}
+										? `translate(${rectSize * (episode + axesLabel.episodePad)}, 0)`
+										: `translate(0, ${rectSize * (episode + axesLabel.episodePad)})`}
 								>
 									<text
 										x={(rectSize - 1) / 2}
 										y={(rectSize - 1) / 2}
-										style:font-weight={hoverEpisode == episode ? 700 : 400}
-										>{episode}</text
+										style:font-weight={hoverEpisode == episode ? 700 : 400}>{episode}</text
 									>
 								</g>
 							{/each}
@@ -309,6 +281,7 @@
 									rel="noreferrer"
 								>
 									<g
+										role="graphics-object"
 										on:mousemove={() => (hoverSeason = rating.seasonNumber)}
 										on:mousemove={() => (hoverEpisode = rating.episodeNumber)}
 										on:mouseleave={() => (hoverSeason = undefined)}
@@ -316,13 +289,11 @@
 										style:cursor="pointer"
 										transform={flip
 											? `translate(${
-													rectSize *
-													(rating.episodeNumber + axesLabel.episodePad)
-											  }, ${rectSize * rating.seasonNumber})`
+													rectSize * (rating.episodeNumber + axesLabel.episodePad)
+												}, ${rectSize * rating.seasonNumber})`
 											: `translate(${rectSize * rating.seasonNumber}, ${
-													rectSize *
-													(rating.episodeNumber + axesLabel.episodePad)
-											  })`}
+													rectSize * (rating.episodeNumber + axesLabel.episodePad)
+												})`}
 									>
 										<rect
 											width={rectSize - 1}
@@ -335,9 +306,7 @@
 											class="text-base tabular-nums"
 											fill={hcl(fillColor).l > 70 ? 'black' : 'white'}
 										>
-											{rating.averageRating == null
-												? '-'
-												: rating.averageRating.toFixed(1)}
+											{rating.averageRating == null ? '-' : rating.averageRating.toFixed(1)}
 										</text>
 									</g>
 								</a>
