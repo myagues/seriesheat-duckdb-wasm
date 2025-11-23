@@ -17,6 +17,22 @@ const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
 
 let db: duckdb.AsyncDuckDB | null = null;
 
+/**
+ * Get the Parquet file URL for episodes
+ * Falls back to production URL if environment variable is not set
+ */
+function getEpisodesURL(): string {
+	return import.meta.env.VITE_EPISODES_PARQUET_URL || 'https://myagues.github.io/seriesheat-duckdb-wasm/episodes.parquet';
+}
+
+/**
+ * Get the Parquet file URL for series
+ * Falls back to production URL if environment variable is not set
+ */
+function getSeriesURL(): string {
+	return import.meta.env.VITE_SERIES_PARQUET_URL || 'https://myagues.github.io/seriesheat-duckdb-wasm/series.parquet';
+}
+
 export const initDB = async () => {
 	if (db) {
 		return db;
@@ -30,18 +46,17 @@ export const initDB = async () => {
 	db = new duckdb.AsyncDuckDB(logger, worker);
 	await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
+	// Register file URLs from environment variables or use production defaults
 	await db.registerFileURL(
 		'episodes.parquet',
-		'https://myagues.github.io/seriesheat-duckdb-wasm/episodes.parquet',
-		// 'http://localhost:5173/episodes.parquet',
+		getEpisodesURL(),
 		duckdb.DuckDBDataProtocol.HTTP,
 		false
 	);
 
 	await db.registerFileURL(
 		'series.parquet',
-		'https://myagues.github.io/seriesheat-duckdb-wasm/series.parquet',
-		// 'http://localhost:5173/series.parquet',
+		getSeriesURL(),
 		duckdb.DuckDBDataProtocol.HTTP,
 		false
 	);
